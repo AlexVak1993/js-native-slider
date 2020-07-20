@@ -4,9 +4,10 @@
   let controls = document.querySelector('#controls-container');
   let indicatorsContainer = document.querySelector('#indicators-container')
   let indicators = document.querySelectorAll('.indicator')
-  let pausePlayBtn = document.querySelector('#pause');
+  let pauseBtn = document.querySelector('#pause');
   let prevBtn = document.querySelector('#prev');
   let nextBtn = document.querySelector('#next');
+  
   let currentSlide = 0;
   let isPlaying = true;
   let interval = timeInterval;
@@ -21,7 +22,7 @@
   const LEFT_ARROW = 'ArrowLeft';
   const RIGHT_ARROW = 'ArrowRight';
 
-  function goToNth(n) {
+  const goToNth = (n) => {
     slides[currentSlide].classList.toggle('active');
     indicators[currentSlide].classList.toggle('active');
     currentSlide = (slidesCount + n) % slidesCount;
@@ -29,36 +30,34 @@
     indicators[currentSlide].classList.toggle('active');
   };
 
-  function goToPrev() {
+  const goToPrev = () => {
     goToNth(currentSlide - 1);
   };
 
-  function goToNext() {
+  const goToNext = () => {
     goToNth(currentSlide + 1);
   };
 
-  function pause() {
+  const pause = () => {
     if (isPlaying) {
       isPlaying = !isPlaying;
-
-
       clearInterval(timerID);
-      pausePlayBtn.innerHTML = FA_PLAY;
+      pauseBtn.innerHTML = FA_PLAY;
     } else { }
   }
 
-  function play() {
+  const play = () => {
     isPlaying = !isPlaying;
-    pausePlayBtn.innerHTML = FA_PAUSE;
+    pauseBtn.innerHTML = FA_PAUSE;
     timerID = setInterval(goToNext, interval);
   }
 
-  function prev() {
+  const prev = () => {
     pause();
     goToPrev();
   }
 
-  function next() {
+  const next = () => {
     pause();
     goToNext();
   }
@@ -77,7 +76,7 @@
   const pressKey = (e) => {
     if (e.key === LEFT_ARROW) prev();
     if (e.key === RIGHT_ARROW) next();
-    if (e.key === SPACE) pause();
+    if (e.key === SPACE) pausePlay();
   }
 
   const swipeStart = (e) => {
@@ -86,12 +85,12 @@
 
   const swipeEnd = (e) => {
     swipeEndX = e.changedTouches[0].pageX;
-    swipeStartX - swipeEndX < 100 && next();
-    swipeStartX - swipeEndX > -100 && prev();
+    swipeStartX - swipeEndX > 100 && next();
+    swipeStartX - swipeEndX < -100 && prev();
   }
 
   const setListeners = () => {
-    pausePlayBtn.addEventListener('click', pausePlay);
+    pauseBtn.addEventListener('click', pausePlay);
     prevBtn.addEventListener('click', prev);
     nextBtn.addEventListener('click', next);
     indicatorsContainer.addEventListener('click', indicate);
@@ -102,7 +101,7 @@
 
   const init = () => {
     controls.style.display = 'block';
-    indicatorsContainer.style.display = 'block';
+    indicatorsContainer.style.display = 'flex';
     setListeners();
     timerID = setInterval(goToNext, interval);
   };
@@ -110,5 +109,3 @@
   init();
 
 }) (3000);
-
-// repair function to ES6
