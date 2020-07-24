@@ -1,0 +1,24 @@
+.indicators {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  justify-content: center;
+
+  list-style: none;
+  z-index: 3;
+  margin: 0;
+  padding: 16px 0;
+}
+
+.indicator {
+  width: 40px;
+  height: 8px;
+  margin: 0 5px;
+  border-radius: 4px;
+  border: 1px solid white;
+
+  &.active {
+    background-color: white;
+  }
+}

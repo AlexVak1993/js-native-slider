@@ -1,0 +1,32 @@
+.controls {
+  position: absolute;
+  bottom: 0;
+  justify-content: space-between;
+  width: 100%;
+
+  z-index: 2;
+}
+
+.control {
+  font-size: 6rem;
+  color: white;
+
+  background-color: #282c34;
+  opacity: 0.1;
+  transition: all 0.5s;
+
+  &:hover {
+    opacity: 0.4;
+  }
+
+  &:nth-of-type(1),
+  &:nth-of-type(3) {
+    padding: 50vh 5vw 50vh 5vw;
+  }
+
+  &:nth-of-type(2) {
+    background-color: transparent;
+    padding: 50vh 15vw 50vh 15vw;
+  }
+}
+

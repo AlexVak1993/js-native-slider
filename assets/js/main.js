@@ -16,8 +16,8 @@
   let swipeStartX = null;
   let swipeEndX = null;
 
-  const FA_PLAY = 'Play';
-  const FA_PAUSE = 'Pause';
+  const FA_PLAY = '<i class="far fa-play-circle"></i>';
+  const FA_PAUSE = '<i class="far fa-pause-circle"></i>';
   const SPACE = ' ';
   const LEFT_ARROW = 'ArrowLeft';
   const RIGHT_ARROW = 'ArrowRight';
@@ -100,7 +100,7 @@
   };
 
   const init = () => {
-    controls.style.display = 'block';
+    controls.style.display = 'flex';
     indicatorsContainer.style.display = 'flex';
     setListeners();
     timerID = setInterval(goToNext, interval);
